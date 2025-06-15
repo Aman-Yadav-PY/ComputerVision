@@ -38,8 +38,8 @@ model = models.Sequential([
 ```
 
 ## 📈 Results
-- **Test RMSE:** ~4.5 (expected)
-- **Test R² score:** ~0.85 (expected)
+- **Test RMSE:** ~9.35
+- **Test R² score:** ~0.63     
 
 ## 🌾 Future Work
 - Extend the model for other crop types
