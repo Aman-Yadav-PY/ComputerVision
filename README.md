@@ -39,7 +39,7 @@ model = models.Sequential([
 
 ## 📈 Results
 - **Test RMSE:** ~9.35
-- **Test R² score:** ~0.63     
+- **Test R² score:** ~0.64     
 
 ## 🌾 Future Work
 - Extend the model for other crop types
