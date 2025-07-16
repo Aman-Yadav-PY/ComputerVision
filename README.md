@@ -1,10 +1,10 @@
 
 # 🌱 Plant Counting Using Transfer Learning
 
-This project implements a plant counting model using **transfer learning** with **MobileNetV2** and **convolutional neural networks (CNN)**. The model predicts plant counts from aerial images of rice seed plants stored as TFRecords.
+This project implements a plant counting model using **transfer learning** with **MobileNetV2** and **convolutional neural networks (CNN)**. The model predicts plant counts from aerial images of rice/cotton seed plants stored as TFRecords.
 
 ## 📌 Project Highlights
-- **Input data:** Aerial images of rice seed plants (TFRecords format)
+- **Input data:** Aerial images of rice and cotton plants (TFRecords format)
 - **Model architecture:** MobileNetV2 as the base model (transfer learning) + custom dense layers for regression
 - **Pipeline:** Efficient TensorFlow data pipeline with batching and prefetching
 - **Training:** Early stopping and learning rate reduction callbacks applied
@@ -18,10 +18,9 @@ This project implements a plant counting model using **transfer learning** with 
 5️⃣ **Evaluate using RMSE and R² metrics**  
 
 ## 🛠 Tools & Frameworks
-- TensorFlow 2 / Keras
+- TensorFlow
 - MobileNetV2 (transfer learning)
 - Matplotlib (visualization)
-- NumPy
 
 ## ⚙ Example Code Snippet
 ```python
@@ -31,8 +30,13 @@ base_model.trainable = False
 model = models.Sequential([
     base_model,
     layers.GlobalAveragePooling2D(),
-    layers.Dense(128, activation='relu'),
+    layers.BatchNormalization(),
     layers.Dropout(0.3),
+    layers.Dense(128, activation='relu'),
+    layers.BatchNormalization(),
+    layers.Dense(256, activation='relu'),
+    layers.BatchNormalization(),
+    layers.Dense(512, activation='relu'),
     layers.Dense(1)
 ])
 ```
@@ -45,11 +49,12 @@ model = models.Sequential([
 - Extend the model for other crop types
 - Incorporate multispectral image data
 - Deploy as part of precision agriculture monitoring tools
+- Crop disruption detection
 
 ## 📂 Output
 ✅ The trained model is saved as:
 ```
-/kaggle/working/Plant_Counting_Upgraded_Model.keras
+Plant_Counting_Upgraded_Model.keras
 ```
 ✅ Includes actual vs predicted scatter plot visualization.
 
