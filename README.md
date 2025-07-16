@@ -54,7 +54,7 @@ model = models.Sequential([
 ## 📂 Output
 ✅ The trained model is saved as:
 ```
-Plant_Counting_Upgraded_Model.keras
+PlantCountingModel.keras
 ```
 ✅ Includes actual vs predicted scatter plot visualization.
 
