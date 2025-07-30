@@ -11,7 +11,12 @@ This project implements a plant counting model using **transfer learning** with 
 - **Evaluation:** RMSE, R² score, and actual vs predicted scatter plot
 
 ## 🚀 How it works
-1️⃣ **Load and decode TFRecord dataset**  
+1️⃣ **Load and decode TFRecord dataset containing labeled crop field aerial images. We have for:** 
+
+    Training - 3062 samples
+    Testing - 31 samples
+    Validation - 57 samples
+    
 2️⃣ **Preprocess images:** Resize to 224×224 and normalize  
 3️⃣ **Apply MobileNetV2 backbone (pre-trained on ImageNet)**  
 4️⃣ **Train regression head with dense layers**  
@@ -24,7 +29,7 @@ This project implements a plant counting model using **transfer learning** with 
 
 ## ⚙ Example Code Snippet
 ```python
-base_model = applications.MobileNetV2(input_shape=(224,224,3), include_top=False, weights='imagenet')
+base_model = applications.MobileNetV2(input_shape=IMG_SIZE + (3,), include_top=False, weights='imagenet')
 base_model.trainable = False
 
 model = models.Sequential([
@@ -34,16 +39,19 @@ model = models.Sequential([
     layers.Dropout(0.3),
     layers.Dense(128, activation='relu'),
     layers.BatchNormalization(),
+    layers.Dropout(0.4),
     layers.Dense(256, activation='relu'),
     layers.BatchNormalization(),
+    layers.Dropout(0.3),
     layers.Dense(512, activation='relu'),
-    layers.Dense(1)
+    layers.Dense(1, activation='relu')
 ])
+
 ```
 
 ## 📈 Results
-- **Test RMSE:** ~9.35
-- **Test R² score:** ~0.64     
+- **Test RMSE:** 8.26
+- **Test R² score:** 0.71    
 
 ## 🌾 Future Work
 - Extend the model for other crop types
@@ -54,7 +62,7 @@ model = models.Sequential([
 ## 📂 Output
 ✅ The trained model is saved as:
 ```
-PlantCountingModel.keras
+model.keras
 ```
 ✅ Includes actual vs predicted scatter plot visualization.
 
